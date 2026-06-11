@@ -1,0 +1,22 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: productosdb
+
+    ports:
+      - "3306:3306"
+
+  backend:
+    build: .
+    container_name: productos_api
+
+    depends_on:
+      - mysql
+
+    ports:
+      - "8080:8080"
